@@ -160,7 +160,6 @@ class ViewController: UIViewController {
         //換資訊
         showTrackName.text = musicList[num].trackName
         showArtistName.text = musicList[num].artistName
-        
     }
     func updatePlayerUI() {
         //更新總時間& Slider 的Value
@@ -169,7 +168,6 @@ class ViewController: UIViewController {
         }
         //轉為歌曲的總時間
         let seconds = CMTimeGetSeconds(duration)
-//        print(seconds)
         //在Label顯示歌曲總時間
         totalPlayLabel.text = formatConversion(time: seconds)
         slider.minimumValue = 0
@@ -193,6 +191,7 @@ class ViewController: UIViewController {
         })
     }
     func playNextMusic(){
+        //下一首～
         if player.rate != 0 {
             player.pause()
         }
@@ -200,7 +199,6 @@ class ViewController: UIViewController {
         if playNum + 1 >= musicList.count{
             if repeatPlay {
                 forwardNum = 0
-//                musicPlay(num: forwardNum)
             }else{
                 defaultTypeLoading()
                 return
@@ -211,6 +209,7 @@ class ViewController: UIViewController {
         musicPlay(num: forwardNum)
     }
     func playPreviousMusic(){
+        //上一首～
         if player.rate != 0 {
             player.pause()
         }
@@ -221,33 +220,32 @@ class ViewController: UIViewController {
         musicPlay(num: backwardNum)
     }
     func checkMusicIsEnd(){
+        //偵測是否播放到最後
         NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: .main) { (_) in
             if self.repeatOnePlay{
-//                let seconds = Int64(0)
+                //回到0秒 繼續播放
                 let targetTime:CMTime = CMTimeMake(value: 0, timescale: 1)
-                // 將當前設置時間設為播放時間
                 self.player.seek(to: targetTime)
                 self.player.play()
             }else{
-                
                 self.playNextMusic()
             }
-//            print("isEnd")
         }
     }
     func createPlayAry(){
+        //創建playArray
         for i in 0 ..< musicList.count{
             playAry.append(i)
         }
-//        print(playAry)
         
     }
     func sortPlayAry(){
+        //playArray 清單排序
         playAry.sort()
     }
     func shufflePlayAry(){
+        //playArray 清單亂序排序
         playAry.shuffle()
-//        print(playAry)
     }
     func defaultTypeLoading(){
         showImage.image = nil
@@ -286,11 +284,6 @@ class ViewController: UIViewController {
             }
             commandCenter.nextTrackCommand.addTarget{ [unowned self] event in
                 self.playNextMusic()
-//                if self.player.rate == 1.0 {
-//                    self.player.pause()
-//                    return .success
-//                }
-//                return .commandFailed
                 return .success
             }
             commandCenter.previousTrackCommand.addTarget{ [unowned self] event in
