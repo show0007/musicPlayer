@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 class ViewController: UIViewController {
     
@@ -59,6 +60,7 @@ class ViewController: UIViewController {
         checkMusicIsEnd()
         player.volume = 0.5
         createPlayAry()
+        setupRemoteTransportControls()
     }
     
     @IBAction func playAndPauesBtn(_ sender: UIButton) {
@@ -80,14 +82,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func backwardBtnDo(_ sender: UIButton) {
-        if player.rate != 0 {
-            player.pause()
-        }
-        var backwardNum = playNum - 1
-        if backwardNum < 0{
-            backwardNum = musicList.count-1
-        }
-        musicPlay(num: backwardNum)
+        playPreviousMusic()
     }
     
     @IBAction func forwardBtnDo(_ sender: UIButton) {
@@ -99,6 +94,7 @@ class ViewController: UIViewController {
         let targetTime:CMTime = CMTimeMake(value: seconds, timescale: 1)
         // 將當前設置時間設為播放時間
         player.seek(to: targetTime)
+        setupNowPlaying()
     }
     
     @IBAction func voiceValChange(_ sender: UISlider) {
@@ -150,6 +146,7 @@ class ViewController: UIViewController {
             changeInfo(num:playAry[num])
             CurrentTime()
             updatePlayerUI()
+            setupNowPlaying()
         }catch{
             print("Failed to init audio player: \(error)")
         }
@@ -213,6 +210,16 @@ class ViewController: UIViewController {
         }
         musicPlay(num: forwardNum)
     }
+    func playPreviousMusic(){
+        if player.rate != 0 {
+            player.pause()
+        }
+        var backwardNum = playNum - 1
+        if backwardNum < 0{
+            backwardNum = musicList.count-1
+        }
+        musicPlay(num: backwardNum)
+    }
     func checkMusicIsEnd(){
         NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: .main) { (_) in
             if self.repeatOnePlay{
@@ -255,5 +262,64 @@ class ViewController: UIViewController {
         slider.minimumValue = 0
     }
     
+    //  設定背景&鎖定播放
+        func setupRemoteTransportControls() {
+            // Get the shared MPRemoteCommandCenter
+            let commandCenter = MPRemoteCommandCenter.shared()
+
+            // Add handler for Play Command
+            commandCenter.playCommand.addTarget { [unowned self] event in
+                if self.player.rate == 0.0 {
+                    self.player.play()
+                    return .success
+                }
+                return .commandFailed
+            }
+
+            // Add handler for Pause Command
+            commandCenter.pauseCommand.addTarget { [unowned self] event in
+                if self.player.rate == 1.0 {
+                    self.player.pause()
+                    return .success
+                }
+                return .commandFailed
+            }
+            commandCenter.nextTrackCommand.addTarget{ [unowned self] event in
+                self.playNextMusic()
+//                if self.player.rate == 1.0 {
+//                    self.player.pause()
+//                    return .success
+//                }
+//                return .commandFailed
+                return .success
+            }
+            commandCenter.previousTrackCommand.addTarget{ [unowned self] event in
+                self.playPreviousMusic()
+                return .success
+            }
+        }
+    //  設定背景播放的歌曲資訊
+        func setupNowPlaying() {
+            // Define Now Playing Info
+            let songName:String = (self.musicList[playAry[playNum]].trackName)
+            let artistName:String = (self.musicList[playAry[playNum]].artistName)
+            let albumImage:String = (self.musicList[playAry[playNum]].previewName)
+            var nowPlayingInfo = [String : Any]()
+            nowPlayingInfo[MPMediaItemPropertyTitle] = songName
+            nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = artistName
+
+            if let image = UIImage(named: albumImage) {
+                nowPlayingInfo[MPMediaItemPropertyArtwork] =
+                    MPMediaItemArtwork(boundsSize: image.size) { size in
+                        return image
+                }
+            }
+            nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime().seconds
+            nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = player.currentItem?.asset.duration.seconds
+            nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player.rate
+
+            // Set the metadata
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+        }
 }
 
