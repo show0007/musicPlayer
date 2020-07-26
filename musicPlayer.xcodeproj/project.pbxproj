@@ -13,7 +13,6 @@
 		695CE8E524CC14A1006C907E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695CE8E324CC14A1006C907E /* Main.storyboard */; };
 		695CE8E724CC14A1006C907E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 695CE8E624CC14A1006C907E /* Assets.xcassets */; };
 		695CE8EA24CC14A1006C907E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 695CE8E824CC14A1006C907E /* LaunchScreen.storyboard */; };
-		695CE8F224CC1525006C907E /* EGOIST-Planetes.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 695CE8F124CC1525006C907E /* EGOIST-Planetes.m4a */; };
 		69B74AAC24CD5B69007E4F3B /* 藍井エイル-流星.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 69B74AA624CD5B67007E4F3B /* 藍井エイル-流星.mp3 */; };
 		69B74AAD24CD5B69007E4F3B /* Hebe-小幸運.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 69B74AA724CD5B68007E4F3B /* Hebe-小幸運.mp3 */; };
 		69B74AAE24CD5B69007E4F3B /* YOASOBI-夜に駆ける.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 69B74AA824CD5B68007E4F3B /* YOASOBI-夜に駆ける.mp3 */; };
@@ -31,8 +30,6 @@
 		695CE8E624CC14A1006C907E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		695CE8E924CC14A1006C907E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		695CE8EB24CC14A1006C907E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		695CE8F124CC1525006C907E /* EGOIST-Planetes.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EGOIST-Planetes.m4a"; sourceTree = "<group>"; };
-		697EFD4A24CC66AE00B83731 /* musicList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = musicList.json; sourceTree = "<group>"; };
 		69B74AA624CD5B67007E4F3B /* 藍井エイル-流星.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "藍井エイル-流星.mp3"; sourceTree = "<group>"; };
 		69B74AA724CD5B68007E4F3B /* Hebe-小幸運.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hebe-小幸運.mp3"; sourceTree = "<group>"; };
 		69B74AA824CD5B68007E4F3B /* YOASOBI-夜に駆ける.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "YOASOBI-夜に駆ける.mp3"; sourceTree = "<group>"; };
@@ -79,7 +76,6 @@
 				695CE8E624CC14A1006C907E /* Assets.xcassets */,
 				695CE8E824CC14A1006C907E /* LaunchScreen.storyboard */,
 				695CE8EB24CC14A1006C907E /* Info.plist */,
-				697EFD4A24CC66AE00B83731 /* musicList.json */,
 			);
 			path = musicPlayer;
 			sourceTree = "<group>";
@@ -93,7 +89,6 @@
 				69B74AA824CD5B68007E4F3B /* YOASOBI-夜に駆ける.mp3 */,
 				69C7966724CD725700894C80 /* 花たん-心做し.mp3 */,
 				69B74AA624CD5B67007E4F3B /* 藍井エイル-流星.mp3 */,
-				695CE8F124CC1525006C907E /* EGOIST-Planetes.m4a */,
 			);
 			path = music;
 			sourceTree = "<group>";
@@ -158,7 +153,6 @@
 				69B74AAC24CD5B69007E4F3B /* 藍井エイル-流星.mp3 in Resources */,
 				69C7966824CD725700894C80 /* 花たん-心做し.mp3 in Resources */,
 				695CE8EA24CC14A1006C907E /* LaunchScreen.storyboard in Resources */,
-				695CE8F224CC1525006C907E /* EGOIST-Planetes.m4a in Resources */,
 				69B74AB124CD62D2007E4F3B /* 春茶-フラレガイガール.mp3 in Resources */,
 				69B74AAD24CD5B69007E4F3B /* Hebe-小幸運.mp3 in Resources */,
 				69B74AAF24CD5B69007E4F3B /* EGOIST-Departures.mp3 in Resources */,

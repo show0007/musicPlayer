@@ -40,7 +40,6 @@ class ViewController: UIViewController {
         MusicList(artistName: "春茶", trackName: "フラレガイガール",previewName:"春茶-フラレガイガール" ,trackType:"mp3"),
         MusicList(artistName: "YOASOBI", trackName: "夜に駆ける",previewName:"YOASOBI-夜に駆ける" ,trackType:"mp3"),
         MusicList(artistName: "Hebe", trackName: "小幸運",previewName:"Hebe-小幸運" ,trackType:"mp3"),
-        MusicList(artistName: "EGOIST", trackName: "Planetes",previewName:"egoist-planetes" ,trackType:"m4a"),
     ]
     
     
